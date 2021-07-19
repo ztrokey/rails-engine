@@ -67,20 +67,4 @@ RSpec.describe 'Merchant requests' do
     expect(merchant[:attributes]).to have_key(:name)
     expect(merchant[:attributes][:name]).to be_a(String)
   end
-
-  xit 'returns a single merchants items' do
-    merchant = create(:merchant)
-    item1 = Item.create!(name: 'one', description: 'one again', unit_price: 1.1, merchant_id: merchant.id)
-    item2 = Item.create!(name: 'two', description: 'two again', unit_price: 2.2, merchant_id: merchant.id)
-    item3 = Item.create!(name: 'three', description: 'three again', unit_price: 3.3, merchant_id: merchant.id)
-
-    merchant.items << item1
-    merchant.items << item2
-    merchant.items << item3
-
-    get "/api/v1/merchants/#{merchant.id}/items"
-
-    expect(merchant).to have_key(:items)
-    expect(merchant[:items]).to be_an(Array)
-  end
 end
