@@ -4,11 +4,12 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show] do
         resources :items, only: [:index]
       end
+      resources :items, only: [:index]
     end
   end
   # resources :transactions
   # resources :invoices
   # resources :customers
   # resources :invoice_items
-  # resources :items
+
 end
