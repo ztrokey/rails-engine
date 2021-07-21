@@ -176,7 +176,7 @@ RSpec.describe 'Item requests' do
 
     delete "/api/v1/items/#{delete_me.id}"
 
-    expect(response).to be_successful
+    expect(response.status).to eq(204)
     expect(Item.all.count).to eq(24)
   end
   it 'can get an items merchant' do
