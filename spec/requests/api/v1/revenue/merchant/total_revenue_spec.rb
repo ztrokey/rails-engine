@@ -55,7 +55,7 @@ RSpec.describe 'total revenue' do
 
     t1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 123456, result: 'success')
     t2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 123456, result: 'success')
-    t3 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 123456, result: 'failed')
+    t3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 123456, result: 'failed')
 
     get "/api/v1/revenue/merchants/#{merchant.id}"
 
