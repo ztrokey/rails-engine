@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Invoice < ApplicationRecord
   validates_presence_of :status,
                         :customer_id
@@ -8,5 +10,13 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
 
-  enum status: [:cancelled, :in_progress, :complete]
+  def self.unshipped_invoices_potential_revenue(limit)
+    joins(invoice_items: { invoice: :transactions })
+      .where.not(status: 'shipped')
+      .where(transactions: { result: 'success' })
+      .group(:id)
+      .select('invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as potential_revenue')
+      .order('potential_revenue DESC')
+      .limit(limit)
+  end
 end

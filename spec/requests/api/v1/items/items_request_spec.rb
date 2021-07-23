@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Item requests' do
@@ -165,7 +167,7 @@ RSpec.describe 'Item requests' do
     item = item_data[:data]
 
     expect(response).to be_successful
-    expect(item[:attributes][:name]).to eq("not one anymore")
+    expect(item[:attributes][:name]).to eq('not one anymore')
   end
   it 'can delete and item' do
     merchant = create(:merchant)
