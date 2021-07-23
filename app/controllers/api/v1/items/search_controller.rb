@@ -12,8 +12,6 @@ class Api::V1::Items::SearchController < ApplicationController
     elsif params[:max_price]
       items = Item.where('unit_price < ?', params[:max_price].to_s)
       render json: ItemSerializer.new(items).serializable_hash.to_json
-    elsif params[:name] && params[:min_price] || params[:max_price]
-      # error message here
     end
   end
 end
