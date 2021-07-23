@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Merchant do
@@ -38,7 +40,7 @@ describe Merchant do
     @merchants.third.items << @item3
 
     @customer = Customer.create!(first_name: 'first',
-                                last_name: 'last')
+                                 last_name: 'last')
 
     @invoice1 = Invoice.create!(customer_id: @customer.id,
                                 merchant_id: @merchants.first.id,
@@ -64,9 +66,9 @@ describe Merchant do
     ii32 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice3.id, quantity: 43, unit_price: 20)
     ii33 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice3.id, quantity: 200, unit_price: 30)
 
-    t1 = Transaction.create!(invoice_id: @invoice1.id, credit_card_number: 123456, result: 'success')
-    t2 = Transaction.create!(invoice_id: @invoice2.id, credit_card_number: 123456, result: 'success')
-    t3 = Transaction.create!(invoice_id: @invoice3.id, credit_card_number: 123456, result: 'success')
+    t1 = Transaction.create!(invoice_id: @invoice1.id, credit_card_number: 123_456, result: 'success')
+    t2 = Transaction.create!(invoice_id: @invoice2.id, credit_card_number: 123_456, result: 'success')
+    t3 = Transaction.create!(invoice_id: @invoice3.id, credit_card_number: 123_456, result: 'success')
   end
 
   describe 'total_revenue' do

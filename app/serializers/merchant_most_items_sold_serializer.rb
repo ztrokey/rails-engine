@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 class MerchantMostItemsSoldSerializer
   include JSONAPI::Serializer
 
   set_type :items_sold
 
   attributes :name
-  attributes :count do |merchant|
-    merchant.sold_items
-  end
+  attributes :count, &:sold_items
 end

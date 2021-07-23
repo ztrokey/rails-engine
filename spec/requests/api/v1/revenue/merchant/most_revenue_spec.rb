@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'most revenue' do
@@ -54,9 +56,9 @@ RSpec.describe 'most revenue' do
     ii32 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice3.id, quantity: 10, unit_price: 20)
     ii33 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 10, unit_price: 30)
 
-    t1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 123456, result: 'success')
-    t2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 123456, result: 'success')
-    t3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 123456, result: 'success')
+    t1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 123_456, result: 'success')
+    t2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 123_456, result: 'success')
+    t3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 123_456, result: 'success')
 
     get '/api/v1/revenue/merchants?quantity=2'
 
