@@ -13,29 +13,19 @@ class Merchant < ApplicationRecord
   end
 
   def self.most_revenue(limit)
-    joins(invoice_items: { invoice: :transactions})
+    joins(invoice_items: { invoice: :transactions })
       .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
       .group(:id).where(transactions: { result: 'success' }, invoices: { status: 'shipped' })
       .order('revenue desc')
       .limit(limit)
   end
+
+  def self.most_items_sold(limit)
+    # require 'pry'; binding.pry
+    joins(invoice_items: { invoice: :transactions })
+      .select('merchants.*, sum(invoice_items.quantity) as sold_items')
+      .group(:id).where(transactions: { result: 'success' }, invoices: { status: 'shipped' })
+      .order('sold_items desc')
+      .limit(limit)
+  end
 end
-
-# Category.joins(articles: [{ comments: :guest }, :tags])
-
-# SELECT categories.* FROM categories
-#   INNER JOIN articles ON articles.category_id = categories.id
-#   INNER JOIN comments ON comments.article_id = articles.id
-#   INNER JOIN guests ON guests.comment_id = comments.id
-#   INNER JOIN tags ON tags.article_id = articles.id
-
-# trans result: 'success'
-# invoice status: 'shipped'
-# sum ii.quan * ii.unit_price as rev
-# order by rev
-# limit by limit
-
-# joins(invoice_items: { invoice: :transactions}).where(transactions: { result: 'success' }, invoices: { status: 'shipped' }).select('merchants.*').sum('invoice_items.quantity * invoice_items.unit_price')
-
-
-# joins(invoice_items: { invoice: :transactions}).select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue').group(:id).where(transactions: { result: 'success' }, invoices: { status: 'shipped' }).order('revenue desc').limit(limit)
