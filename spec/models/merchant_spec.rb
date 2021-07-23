@@ -94,6 +94,8 @@ describe Merchant do
       merchant3 = @merchants.third
 
       expect(Merchant.most_items_sold(2)).to eq([merchant3, merchant2])
+      expect(Merchant.most_items_sold(2).first.sold_items).to eq(277)
+      expect(Merchant.most_items_sold(2).second.sold_items).to eq(159)
     end
   end
 end
