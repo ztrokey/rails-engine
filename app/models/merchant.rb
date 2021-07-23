@@ -21,7 +21,6 @@ class Merchant < ApplicationRecord
   end
 
   def self.most_items_sold(limit)
-    # require 'pry'; binding.pry
     joins(invoice_items: { invoice: :transactions })
       .select('merchants.*, sum(invoice_items.quantity) as sold_items')
       .group(:id).where(transactions: { result: 'success' }, invoices: { status: 'shipped' })
